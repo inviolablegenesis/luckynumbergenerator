@@ -1,19 +1,24 @@
+import java.sql.SQLOutput;
 import java.text.MessageFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
+import java.util.Scanner;
 
 public class LuckyNumGen {
 
-  // given: yyyymmdd
-  private static final String dob = "19931023";
-
   public static void main(String[] args) {
+    try {
+      String dob = getDate();
 
-    validate(dob);
-    int[] num = convertToIntArray(dob);
+      validate(dob);
+      int[] num = convertToIntArray(dob);
 
-    System.out.println(MessageFormat.format("Your lucky number is {0}!", generate(num)));
+      System.out.println(MessageFormat.format("Your lucky number is {0}!", generate(num)));
+
+    } catch (Exception e) {
+      System.out.println("An error has occurred. Please check your input and try again.");
+    }
   }
 
   /**
@@ -44,7 +49,7 @@ public class LuckyNumGen {
    * @param dob
    */
   private static void validate(String dob) {
-    // DateTimeFormatter.BASIC_ISO_DATE is yyyymmdd
+    // BASIC_ISO_DATE is yyyymmdd
     try {
       LocalDate.parse(dob, DateTimeFormatter.BASIC_ISO_DATE);
     } catch (Exception e) {
@@ -60,5 +65,17 @@ public class LuckyNumGen {
    */
   private static int[] convertToIntArray(String str) {
     return Arrays.stream(str.split("")).mapToInt(Integer::parseInt).toArray();
+  }
+
+  /**
+   * Get user input
+   *
+   * @return
+   */
+  private static String getDate() {
+    System.out.print("Please enter your date of birth (yyyymmdd): ");
+
+    Scanner sc = new Scanner(System.in);
+    return sc.next();
   }
 }

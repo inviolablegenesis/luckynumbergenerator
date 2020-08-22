@@ -12,7 +12,7 @@ This single digit will be printed as the lucky number.
 
 ## Future enhancements
 
-Use scanner to input date of birth
+~~Use scanner to input date of birth~~
 
 Display a page for user to input
 - date by selecting from a calendar
